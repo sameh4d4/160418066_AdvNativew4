@@ -27,8 +27,9 @@ class StudentDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val id = StudentDetailFragmentArgs.fromBundle(requireArguments()).id
         viewModel = ViewModelProvider(this).get(DetailViewModel::class.java)
-        viewModel.fetch()
+        viewModel.fetch(id)
         observeViewModel()
     }
     private fun observeViewModel() {

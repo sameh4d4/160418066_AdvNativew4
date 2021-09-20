@@ -26,6 +26,13 @@ class StudentListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        refreshLayout.setOnRefreshListener {
+            recView.visibility = View.GONE
+            txtError.visibility = View.GONE
+            progressLoad.visibility = View.VISIBLE
+            viewModel.refresh()
+            refreshLayout.isRefreshing = false
+        }
         viewModel = ViewModelProvider(this).get(ListViewModel::class.java)
         viewModel.refresh()
         recView.layoutManager = LinearLayoutManager(context)
