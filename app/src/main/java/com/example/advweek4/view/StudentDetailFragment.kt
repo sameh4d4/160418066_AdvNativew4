@@ -9,8 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.advweek4.R
 import com.example.advweek4.model.Student
+import com.example.advweek4.util.loadImage
 import com.example.advweek4.viewmodel.DetailViewModel
 import com.example.advweek4.viewmodel.ListViewModel
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_student_detail.*
 import kotlinx.android.synthetic.main.fragment_student_list.*
 
@@ -35,6 +38,11 @@ class StudentDetailFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.studentLD.observe(viewLifecycleOwner, Observer {
             with(it){
+                Picasso.get().load(photoUrl.toString())
+                    .resize(400, 400)
+                    .centerCrop()
+                    .error(R.drawable.ic_baseline_error_24)
+                    .into(imgStudentDetail)
                 txtId.setText(id)
                 txtBoD.setText(bod)
                 txtName.setText(name)
